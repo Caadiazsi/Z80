@@ -580,9 +580,22 @@ if __name__ == "__main__":
     ui = Ui_Z80Simulator()
     ui.setupUi(Z80Simulator)
     Z80Simulator.show()
+    keys = []
+    keys.extend(range(0,2**16))
+    memory = {}
+    memory = dict.fromkeys(keys)
+    file = open("assemblerCode.txt","r")
+    aux = 0
+    for line in file:
+        words = line.split()
+        for word in words:
+            memory[aux] = word
+            print(memory[aux])
+            aux = aux+1
+    #print(int("f",16))
     while(loop==1):
-        RA = int(input("INGRESE REGISTRO A:"))
-        LAST_INS = input("INGRESE LAST_INSTRUCCION: ")
+        #RA = int(input("INGRESE REGISTRO A:"))
+        
         ui.refreshRegisters(Z80Simulator)
         ui.retranslateUi(Z80Simulator)
     sys.exit(app.exec_())
