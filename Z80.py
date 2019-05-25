@@ -29,6 +29,21 @@ PC = 0000
 ID_BUS = 0000
 ADD_BUS = 0000
 CON_BUS = 0000
+M1 = 0
+MREQ = 0
+IORQ = 0
+RD = 0
+WRT = 0
+RFSH = 0
+HALT = 0
+WAIT = 0
+INT = 0
+NMI = 0
+RESET = 0
+BUSRQ = 0
+BUSRACK = 0
+LAST_INS = ""
+NEXT_INS = ""
 
 class Ui_Z80Simulator(object):
     def setupUi(self, Z80Simulator):
@@ -458,7 +473,7 @@ class Ui_Z80Simulator(object):
         Z80Simulator.setStatusBar(self.statusbar)
         self.retranslateUi(Z80Simulator)
         QtCore.QMetaObject.connectSlotsByName(Z80Simulator)
-        
+
     def refreshRegisters(self, Z80Simulator):
         self.lcdNumber.display(RA)
         self.lcdNumber_2.display(RB)
@@ -538,37 +553,36 @@ class Ui_Z80Simulator(object):
         self.label_40.setText(_translate("Z80Simulator", "RESET"))
         self.label_41.setText(_translate("Z80Simulator", "BUSRQ"))
         self.label_42.setText(_translate("Z80Simulator", "BUSRACK"))
-        self.label_49.setText(_translate("Z80Simulator", "0"))
-        self.label_43.setText(_translate("Z80Simulator", "0"))
-        self.label_44.setText(_translate("Z80Simulator", "0"))
-        self.label_45.setText(_translate("Z80Simulator", "0"))
-        self.label_46.setText(_translate("Z80Simulator", "0"))
-        self.label_47.setText(_translate("Z80Simulator", "0"))
-        self.label_48.setText(_translate("Z80Simulator", "0"))
-        self.label_50.setText(_translate("Z80Simulator", "0"))
-        self.label_51.setText(_translate("Z80Simulator", "0"))
-        self.label_52.setText(_translate("Z80Simulator", "0"))
-        self.label_53.setText(_translate("Z80Simulator", "0"))
-        self.label_54.setText(_translate("Z80Simulator", "0"))
-        self.label_55.setText(_translate("Z80Simulator", "0"))
+        self.label_49.setText(_translate("Z80Simulator", str(M1)))
+        self.label_43.setText(_translate("Z80Simulator", str(MREQ)))
+        self.label_44.setText(_translate("Z80Simulator", str(IORQ)))
+        self.label_45.setText(_translate("Z80Simulator", str(RD)))
+        self.label_46.setText(_translate("Z80Simulator", str(WRT)))
+        self.label_47.setText(_translate("Z80Simulator", str(RFSH)))
+        self.label_48.setText(_translate("Z80Simulator", str(HALT)))
+        self.label_50.setText(_translate("Z80Simulator", str(WAIT)))
+        self.label_51.setText(_translate("Z80Simulator", str(INT)))
+        self.label_52.setText(_translate("Z80Simulator", str(NMI)))
+        self.label_53.setText(_translate("Z80Simulator", str(RESET)))
+        self.label_54.setText(_translate("Z80Simulator", str(BUSRQ)))
+        self.label_55.setText(_translate("Z80Simulator", str(BUSRACK)))
         self.pushButton.setText(_translate("Z80Simulator", "Siguiente"))
         self.groupBox_7.setTitle(_translate("Z80Simulator", "Anterior Instrucción"))
-        self.label_56.setText(_translate("Z80Simulator", "Instruccion"))
+        self.label_56.setText(_translate("Z80Simulator", LAST_INS))
         self.groupBox_8.setTitle(_translate("Z80Simulator", "Siguiente Instrucción"))
-        self.label_57.setText(_translate("Z80Simulator", "Instruccion"))
-
+        self.label_57.setText(_translate("Z80Simulator", NEXT_INS))
 
 if __name__ == "__main__":
     import sys
-    RA = int(input("INGRESE REGISTRO A:"))
     loop = 1
     app = QtWidgets.QApplication(sys.argv)
     Z80Simulator = QtWidgets.QMainWindow()
     ui = Ui_Z80Simulator()
     ui.setupUi(Z80Simulator)
-    RA = int(input("INGRESE REGISTRO A:"))
     Z80Simulator.show()
     while(loop==1):
         RA = int(input("INGRESE REGISTRO A:"))
+        LAST_INS = input("INGRESE LAST_INSTRUCCION: ")
         ui.refreshRegisters(Z80Simulator)
+        ui.retranslateUi(Z80Simulator)
     sys.exit(app.exec_())
